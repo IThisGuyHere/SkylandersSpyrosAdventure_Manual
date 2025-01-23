@@ -43,7 +43,7 @@ class Goal(Choice):
     all_levels_perfected = 1
 
 class CharactersAsItems(Toggle):
-    """Unlock characters individually instead of by element."""
+    """Unlock skylanders individually instead of by element."""
     display_name = "Characters as Items"
     default = True
 
@@ -89,10 +89,10 @@ class EnableHardTraps(Toggle):
 
 class CharactersToExclude(ItemSet):
     """
-    Characters that will not be included in generation.
+    Skylanders that will not be included in generation.
     Does nothing if CharactersAsItems is false.
-    Warning: if you have less than eight characters (and at least one from each element), some locations will be unreachable, 
-             which will make All Levels Perfected and some Completionist checks impossible to achieve
+    Warning: if you have less than eight skylanders (and at least one from each element), some locations will be
+      unreachable, which will make All Levels Perfected and some Completionist checks impossible to achieve
     """
     display_name = "Characters to Exclude"
     verify_item_name = True
