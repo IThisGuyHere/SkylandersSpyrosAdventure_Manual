@@ -576,7 +576,7 @@
 
 
 	{
-		"count": 24,
+		"count": 0,
 		"name": "Element Lock Trap",
 		"category": [
 			"Traps"
@@ -584,15 +584,15 @@
 		"trap": true
 	},
 	{
-		"count": 24,
-		"name": "Rename Character Trap",
+		"count": 0,
+		"name": "Rename Skylander Trap",
 		"category": [
 			"Traps"
 		],
 		"trap": true
 	},
 	{
-		"count": 16,
+		"count": 0,
 		"name": "Solo Trap",
 		"category": [
 			"Traps"
@@ -600,8 +600,8 @@
 		"trap": true
 	},
 	{
-		"count": 8,
-		"name": "Reset Last Character Trap",
+		"count": 0,
+		"name": "Reset Last Skylander Trap",
 		"category": [
 			"Traps", "Hard Traps"
 		],
