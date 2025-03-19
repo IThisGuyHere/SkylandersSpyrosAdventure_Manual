@@ -369,8 +369,18 @@ class ManualWorld(World):
             trap_count = extras * trap_percent // 100
             filler_count = extras - trap_count
 
+            weights = []
+            
+            for trap in traps:
+                option_name = trap.casefold().replace(" ","_") + "_weight"
+                weights.append(get_option_value(self.multiworld,self.player,option_name))
+
+            if sum(weights) == 0:
+                logging.warning(f"{self.player_name} thought setting all trap weights to 0 would be funny. They won't be laughing for long.")
+                weights[-1] = 1
+
             for _ in range(0, trap_count):
-                extra_item = self.create_item(self.random.choice(traps))
+                extra_item = self.create_item(self.random.choices(traps,weights=weights)[0])
                 item_pool.append(extra_item)
 
             for _ in range(0, filler_count):

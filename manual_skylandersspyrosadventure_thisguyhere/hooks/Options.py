@@ -82,11 +82,6 @@ class ActiveItems(Toggle):
     display_name = "Active Items"
     default = False
 
-class EnableHardTraps(Toggle):
-    """Allows hard traps to replace fillers (currently only Reset Character Trap)."""
-    display_name = "Hard Traps"
-    default = True
-
 class CharactersToExclude(ItemSet):
     """
     Skylanders that will not be included in generation.
@@ -104,6 +99,40 @@ class WhitelistCharacters(Toggle):
     display_name = "Whitelist Characters"
     default = False
 
+class ElementLockWeight(Range):
+    """Weight of Element Lock traps. Set to 0 to disable. Don't set all weights to 0."""
+    display_name = "Element Lock trap Weight"
+    range_start = 0
+    range_end = 100
+    default = 45
+
+class RenameSkylanderWeight(Range):
+    """Weight of Rename Skylander traps. Set to 0 to disable. Don't set all weights to 0."""
+    display_name = "Rename Skylander trap Weight"
+    range_start = 0
+    range_end = 100
+    default = 20
+
+class SoloWeight(Range):
+    """Weight of Solo traps. Set to 0 to disable. Don't set all weights to 0."""
+    display_name = "Solo trap Weight"
+    range_start = 0
+    range_end = 100
+    default = 25
+
+class ResetCharacterWeight(Range):
+    """Weight of Reset Last Skylander traps. Set to 0 to disable. Don't set all weights to 0."""
+    display_name = "Reset Last Skylander trap Weight"
+    range_start = 0
+    range_end = 100
+    default = 10
+
+class FillerTrapPercent(Range):
+    """How many fillers will be replaced with traps. 0 means no traps at all, 100 means all fillers are traps."""
+    display_name = "TrapPercent"
+    range_end = 100
+    default = 50
+
 # This is called before any manual options are defined, in case you want to define your own with a clean slate or let Manual define over them
 def before_options_defined(options: dict) -> dict:
     options["goal"] = Goal
@@ -115,11 +144,17 @@ def before_options_defined(options: dict) -> dict:
     options["include_crypt"] = DarklightCryptAddon
     options["include_peak"] = DragonsPeakAddon
     options["active_items"] = ActiveItems
-    options["hard_traps"] = EnableHardTraps
     options["characters_to_exclude"] = CharactersToExclude
     options["whitelist_characters"] = WhitelistCharacters
+    options["element_lock_trap_weight"] = ElementLockWeight
+    options["rename_skylander_trap_weight"] = RenameSkylanderWeight
+    options["solo_trap_weight"] = SoloWeight
+    options["reset_last_skylander_trap_weight"] = ResetCharacterWeight
     return options
 
 # This is called after any manual options are defined, in case you want to see what options are defined or want to modify the defined options
 def after_options_defined(options: dict) -> dict:
+    
+    options["filler_traps"] = FillerTrapPercent
+
     return options
