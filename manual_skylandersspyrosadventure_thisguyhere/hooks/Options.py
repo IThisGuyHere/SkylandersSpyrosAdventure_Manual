@@ -104,7 +104,7 @@ class ElementLockWeight(Range):
     display_name = "Element Lock trap Weight"
     range_start = 0
     range_end = 100
-    default = 47
+    default = 45
 
 class RenameSkylanderWeight(Range):
     """Weight of Rename Skylander traps. Set to 0 to disable. Don't set all weights to 0."""
@@ -125,13 +125,13 @@ class ResetCharacterWeight(Range):
     display_name = "Reset Last Skylander trap Weight"
     range_start = 0
     range_end = 100
-    default = 8
+    default = 10
 
 class FillerTrapPercent(Range):
     """How many fillers will be replaced with traps. 0 means no traps at all, 100 means all fillers are traps."""
     display_name = "TrapPercent"
     range_end = 100
-    default = 25
+    default = 50
 
 # This is called before any manual options are defined, in case you want to define your own with a clean slate or let Manual define over them
 def before_options_defined(options: dict) -> dict:
