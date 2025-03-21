@@ -2162,7 +2162,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "({YamlEnabled(characters_as_items)} and |Zap|) or ({YamlDisabled(characters_as_items)} and |All Air Characters|)"
+			"requires": "({YamlEnabled(characters_as_items)} and |Zap|) or ({YamlDisabled(characters_as_items)} and |All Water Characters|)"
 		},
 		{
 			"name": "Shattered Island Perfection",
