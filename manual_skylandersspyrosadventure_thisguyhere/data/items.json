@@ -15,7 +15,7 @@
 		"category": [
 			"Empire of Ice Pack", "Chapter"
 		],
-		"progression_skip_balancing": true
+		"progression": true
 	},
 	{
 		"count": "1",
@@ -23,7 +23,7 @@
 		"category": [
 			"Pirate Seas Pack", "Chapter"
 		],
-		"progression_skip_balancing": true
+		"progression": true
 	},
 	{
 		"count": "1",
@@ -31,7 +31,7 @@
 		"category": [
 			"Darklight Crypt Pack", "Chapter"
 		],
-		"progression_skip_balancing": true
+		"progression": true
 	},
 	{
 		"count": "1",
@@ -39,7 +39,7 @@
 		"category": [
 			"Dragon's Peak Pack", "Chapter"
 		],
-		"progression_skip_balancing": true
+		"progression": true
 	},
 
 
