@@ -42,6 +42,18 @@ class Goal(Choice):
     defeat_kaos = 0
     all_levels_perfected = 1
 
+class LinearMode(Toggle):
+    """Receive chapters sequentially instead of in a random order. If false, you will need an existing save with minimal progress."""
+    display_name = "Linear Mode"
+    default = True
+
+class NumChaptersToBeat(Range):
+    """Number of chapter completions required to challenge Kaos. Set this low for synchronous multiworlds."""
+    display_name = "Chapters to Beat"
+    range_start = 1
+    range_end = 26
+    default = 22
+
 class CharactersAsItems(Toggle):
     """Unlock skylanders individually instead of by element."""
     display_name = "Characters as Items"
@@ -50,11 +62,6 @@ class CharactersAsItems(Toggle):
 class ChallengesAsLocations(Toggle):
     """Add locations for Cali's heroic challenges."""
     display_name = "Challenges as Locations"
-    default = False
-
-class PerElementUpgrades(Toggle):
-    """Upgrade items become per-element instead of universal. Adds about 50 items"""
-    display_name = "Per-Character Upgrades"
     default = False
 
 class EmpireOfIceAddon(Toggle):
@@ -136,9 +143,10 @@ class FillerTrapPercent(Range):
 # This is called before any manual options are defined, in case you want to define your own with a clean slate or let Manual define over them
 def before_options_defined(options: dict) -> dict:
     options["goal"] = Goal
+    options["linear_mode"] = LinearMode
+    options["chapters_to_beat"] = NumChaptersToBeat
     options["characters_as_items"] = CharactersAsItems
     options["challenges_as_locations"] = ChallengesAsLocations
-    options["per_element_upgrades"] = PerElementUpgrades
     options["include_empire"] = EmpireOfIceAddon
     options["include_ship"] = PirateShipAddon
     options["include_crypt"] = DarklightCryptAddon
