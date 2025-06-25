@@ -63,14 +63,6 @@
 
 	{
 		"count": "7",
-		"name": "Progressive Skylander Upgrade",
-		"category": [
-			"Upgrade", "Generic Upgrade"
-		],
-		"useful": true
-	},
-	{
-		"count": "7",
 		"name": "Progressive Fire Skylander Upgrade",
 		"category": [
 			"Upgrade", "Element Upgrade"
