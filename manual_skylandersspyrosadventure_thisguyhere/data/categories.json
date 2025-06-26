@@ -15,14 +15,19 @@
     "Soul Gem Collection": {
         "hidden": true
     },
-    "Perfection": {
+    "Speedrun": {
         "hidden": true
     },
     "Chapter": {
         "hidden": false
     },
-    "Soul Abilities": {
-        "hidden": false
+    "Linear": {
+        "yaml_option": ["linear_mode"],
+        "hidden": true
+    },
+    "Nonlinear": {
+        "yaml_option": ["!linear_mode"],
+        "hidden": true
     },
     "Winged Sapphire": {
         "hidden": true
@@ -33,6 +38,9 @@
     },
     "Skylander": {
         "yaml_option": ["characters_as_items"],
+        "hidden": true
+    },
+    "Skylander - Fast": {
         "hidden": true
     },
     "Element": {
@@ -68,8 +76,5 @@
     },
     "Traps": {
         "hidden": false
-    },
-    "Hard Traps": {
-        "hidden": true
     }
 }

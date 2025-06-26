@@ -139,7 +139,7 @@
 
 	{
 		"count": 1,
-		"name": "All Fire Characters",
+		"name": "All Fire Skylanders",
 		"category": [
 			"Element", "Skylander - Fire"
 		],
@@ -147,7 +147,7 @@
 	},
 	{
 		"count": 1,
-		"name": "All Water Characters",
+		"name": "All Water Skylanders",
 		"category": [
 			"Element", "Skylander - Water"
 		],
@@ -155,7 +155,7 @@
 	},
 	{
 		"count": 1,
-		"name": "All Earth Characters",
+		"name": "All Earth Skylanders",
 		"category": [
 			"Element", "Skylander - Earth"
 		],
@@ -163,7 +163,7 @@
 	},
 	{
 		"count": 1,
-		"name": "All Air Characters",
+		"name": "All Air Skylanders",
 		"category": [
 			"Element", "Skylander - Air"
 		],
@@ -171,7 +171,7 @@
 	},
 	{
 		"count": 1,
-		"name": "All Life Characters",
+		"name": "All Life Skylanders",
 		"category": [
 			"Element", "Skylander - Life"
 		],
@@ -179,7 +179,7 @@
 	},
 	{
 		"count": 1,
-		"name": "All Undead Characters",
+		"name": "All Undead Skylanders",
 		"category": [
 			"Element", "Skylander - Undead"
 		],
@@ -187,7 +187,7 @@
 	},
 	{
 		"count": 1,
-		"name": "All Tech Characters",
+		"name": "All Tech Skylanders",
 		"category": [
 			"Element", "Skylander - Tech"
 		],
@@ -195,7 +195,7 @@
 	},
 	{
 		"count": 1,
-		"name": "All Magic Characters",
+		"name": "All Magic Skylanders",
 		"category": [
 			"Element", "Skylander - Magic"
 		],
@@ -237,7 +237,8 @@
 		"name": "Flameslinger",
 		"category": [
 			"Skylander", 
-			"Skylander - Fire"
+			"Skylander - Fire",
+			"Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -282,7 +283,8 @@
 		"name": "Bash",
 		"category": [
 			"Skylander", 
-			"Skylander - Earth"
+			"Skylander - Earth",
+			"Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -338,7 +340,8 @@
 		"name": "Drill Sergeant",
 		"category": [
 			"Skylander", 
-			"Skylander - Tech"
+			"Skylander - Tech",
+			"Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -356,7 +359,8 @@
 		"name": "Spyro",
 		"category": [
 			"Skylander", 
-			"Skylander - Magic"
+			"Skylander - Magic",
+			"Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -383,7 +387,8 @@
 		"name": "Wrecking Ball",
 		"category": [
 			"Skylander", 
-			"Skylander - Magic"
+			"Skylander - Magic",
+			"Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -447,6 +452,7 @@
 		"category": [
 			"Skylander", 
 			"Skylander - Undead",
+			"Skylander - Fast",
 			"Add-on",
 			"Darklight Crypt Pack"
 		],
@@ -457,7 +463,8 @@
 		"name": "Cynder",
 		"category": [
 			"Skylander", 
-			"Skylander - Undead"
+			"Skylander - Undead",
+			"Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -466,7 +473,8 @@
 		"name": "Zap",
 		"category": [
 			"Skylander", 
-			"Skylander - Water"
+			"Skylander - Water",
+			"Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -595,7 +603,7 @@
 		"count": 0,
 		"name": "Reset Last Skylander Trap",
 		"category": [
-			"Traps", "Hard Traps"
+			"Traps"
 		],
 		"trap": true
 	}
