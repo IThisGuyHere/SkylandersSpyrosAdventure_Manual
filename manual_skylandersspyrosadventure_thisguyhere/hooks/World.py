@@ -12,7 +12,7 @@ from ..Locations import ManualLocation
 from ..Data import game_table, item_table, location_table, region_table
 
 # These helper methods allow you to determine if an option has been set, or what its value is, for any player in the multiworld
-from ..Helpers import is_option_enabled, get_option_value
+from ..Helpers import is_option_enabled, get_option_value, is_location_name_enabled, is_item_name_enabled
 
 # calling logging.info("message") anywhere below in this file will output the message to both console and log file
 import logging
@@ -56,6 +56,20 @@ def after_create_regions(world: World, multiworld: MultiWorld, player: int):
     if hasattr(multiworld, "clear_location_cache"):
         multiworld.clear_location_cache()
 
+    # in non-linear mode, we need to make the hub the new starting region and connect it to all chapters
+    if not get_option_value(multiworld, player, "linear_mode"):
+        chapters = []
+        for region in multiworld.regions:
+            if region.player == player and "Chapter" in region.name:
+                region.set_exits([])
+                chapters.append(region.name)
+        manual = multiworld.get_region("Manual", player)
+        manual.set_exits([])
+        manual.add_exits(["Hub"])
+
+        hub = multiworld.get_region("Hub", player)
+        hub.add_exits(chapters)    
+
 # The item pool before starting items are processed, in case you want to see the raw item pool at that stage
 def before_create_items_starting(item_pool: list, world: World, multiworld: MultiWorld, player: int) -> list:
 
@@ -67,47 +81,50 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
     #
     # Because multiple copies of an item can exist, you need to add an item name
     # to the list multiple times if you want to remove multiple copies of it.
+
+    # if a character is not in the list and whitelist is enabled OR a character is in the list and whitelist is disabled, remove that item
     names_to_remove = get_option_value(multiworld, player, "characters_to_exclude")
     use_character_whitelist = get_option_value(multiworld, player, "whitelist_characters")
-    # if a character is not in the list and whitelist is enabled OR a character is in the list and whitelist is disabled, remove that item
+    challenges_enabled = get_option_value(multiworld, player, "challenges_as_locations")
+
+    if use_character_whitelist and len(names_to_remove) < 8:
+        raise Exception("Whitelist was enabled, but does not contain enough skylanders. For optimal results, please ensure that the whitelist " + 
+                        "contains at least 8 skylanders and at least one from each element.")
 
     # need to first check if the item is in item_pool
-    for item in item_pool:
-        table_item = next(i for i in item_table if i["name"] == item.name)
-        if ("category" not in table_item or "Skylander" not in table_item.get("category")):
+    for item in item_table:
+        #table_item = next(i for i in item_table if i["name"] == item.name)
+        if "category" not in item or "Skylander" not in item.get("category") or not is_item_name_enabled(multiworld,player,item.get("name")):
             continue
-        item_name = item.name
+        item_name = item.get("name")
         character_in_list = False
-        for char_name in names_to_remove:
-            if item_name.casefold() == char_name.casefold():
-                character_in_list = True
-                break
+        #for char_name in names_to_remove:
+        #    if item_name.casefold() == char_name.casefold():
+        #        character_in_list = True
+        #        break
+        if item_name in names_to_remove:
+            character_in_list = True
 
         if (use_character_whitelist ^ character_in_list):
             itemNamesToRemove.append(item_name)
             # get rid of heroic challenges for removed characters
-            if (get_option_value(multiworld, player, "challenges_as_locations")):
-                locationNamesToRemove.append("Heroic Challenge - " + item_name)
-            #print("Marked for removal: " + item_name)   # debug
+            if (challenges_enabled):
+                locationNamesToRemove.append(f"Heroic Challenge - {item_name}")
 
-
-    #print("doing okay before actual deletion")  # debug
-    #print(itemNamesToRemove)    # debug
+    if challenges_enabled:
+        for region in multiworld.regions:
+            if region.player == player:
+                for location in list(region.locations):
+                    if location.name in locationNamesToRemove:
+                        region.locations.remove(location)
+                        print(f"Successfully removed Heroic Challenge - {itemName}")   # debug
+        if hasattr(multiworld, "clear_location_cache"):
+            multiworld.clear_location_cache()
 
     for itemName in itemNamesToRemove:
-        #print("got inside removal loop with " + itemName)  # debug
-        item = next(i for i in item_pool if i.name == itemName) # SUNBURN ISN'T IN THE ITEM POOL
+        item = next(i for i in item_pool if i.name == itemName)
         item_pool.remove(item)
         print("Successfully removed " + itemName)   # debug
-
-    for region in multiworld.regions:
-        if region.player == player:
-            for location in list(region.locations):
-                if location.name in locationNamesToRemove:
-                    region.locations.remove(location)
-                    print("Successfully removed " + "Heroic Challenge - " + itemName)   # debug
-    if hasattr(multiworld, "clear_location_cache"):
-        multiworld.clear_location_cache()
 
     return item_pool
 
@@ -121,11 +138,64 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
     # Because multiple copies of an item can exist, you need to add an item name
     # to the list multiple times if you want to remove multiple copies of it.
 
+
+    # if playing nonlinear mode, we need to place Core of Light Fragments in the chapter locations and remove any extras
+    if not get_option_value(multiworld, player, "linear_mode"):
+
+        extra_map_frags = (4 - get_option_value(multiworld, player, "include_empire") - 
+                           get_option_value(multiworld, player, "include_ship") - 
+                           get_option_value(multiworld, player, "include_crypt") - 
+                           get_option_value(multiworld, player, "include_peak"))
+        
+        for i in range(extra_map_frags):
+            itemNamesToRemove.append("Core of Light Fragment")
+
+        for location in location_table:
+            if "Level Completion" in location["category"] and is_location_name_enabled(multiworld,player,location["name"]): 
+                level = multiworld.get_location(location["name"], player)
+                item_to_place = next(i for i in item_pool if i.name == "Core of Light Fragment")
+                level.place_locked_item(item_to_place)
+                item_pool.remove(item_to_place)
+
+
+
     for itemName in itemNamesToRemove:
-        #print("got inside removal loop with " + itemName)  # debug
-        item = next(i for i in item_pool if i.name == itemName) # SUNBURN ISN'T IN THE ITEM POOL
+        item = next(i for i in item_pool if i.name == itemName)
         item_pool.remove(item)
-        print("Successfully removed " + itemName)   # debug
+
+
+    # since the traps are weight-based, trap and filler generation needs to be overridden here
+    
+    extras = len(multiworld.get_unfilled_locations(player=player)) - len(item_pool)
+
+    if extras > 0:
+        traps = [item["name"] for item in item_table if item.get("trap")]
+        filler = [item["name"] for item in item_table if item.get("filler")]
+        #filler.append(world.get_filler_item_name())    # not really necessary anymore
+        trap_percent = get_option_value(multiworld, player, "filler_traps")
+        if not traps:
+            trap_percent = 0
+
+        trap_count = extras * trap_percent // 100
+        filler_count = extras - trap_count
+
+        weights = []
+            
+        for trap in traps:
+            option_name = trap.casefold().replace(" ","_") + "_weight"
+            weights.append(get_option_value(multiworld,player,option_name))
+
+        if sum(weights) == 0:
+            logging.warning(f"{world.player_name} thought setting all trap weights to 0 would be funny. They won't be laughing for long.")
+            weights[-1] = 1
+
+        for _ in range(0, trap_count):
+            extra_item = world.create_item(world.random.choices(traps,weights=weights)[0])
+            item_pool.append(extra_item)
+
+        for _ in range(0, filler_count):
+            extra_item = world.create_item(world.random.choice(filler))
+            item_pool.append(extra_item)
 
     return item_pool
 

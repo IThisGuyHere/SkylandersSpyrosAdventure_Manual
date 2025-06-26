@@ -5,135 +5,135 @@
       "Chapter 2"
     ],
     "starting": true,
-    "requires": "|Progressive Chapter:1|"
+    "requires": "|Progressive Chapter:1| or |Shattered Island|"
   },
   "Chapter 2": {
     "connects_to": [
       "Chapter 3", "Hub", "Darklight Crypt"
     ],
-    "requires": "|Progressive Chapter:2|"
+    "requires": "|Progressive Chapter:2| or |Perilous Pastures|"
   },
   "Chapter 3": {
     "connects_to": [
       "Chapter 4", "Dragon's Peak"
     ],
-    "requires": "|Progressive Chapter:3|"
+    "requires": "|Progressive Chapter:3| or |Sky Schooner Docks|"
   },
   "Chapter 4": {
     "connects_to": [
       "Chapter 5", "Empire of Ice", "Pirate Seas"
     ],
-    "requires": "|Progressive Chapter:4|"
+    "requires": "|Progressive Chapter:4| or |Stormy Stronghold|"
   },
   "Chapter 5": {
     "connects_to": [
       "Chapter 6"
     ],
-    "requires": "|Progressive Chapter:5|"
+    "requires": "|Progressive Chapter:5| or |Oilspill Island|"
   },
   "Chapter 6": {
     "connects_to": [
       "Chapter 7"
     ],
-    "requires": "|Progressive Chapter:6|"
+    "requires": "|Progressive Chapter:6| or |Dark Water Cove|"
   },
   "Chapter 7": {
     "connects_to": [
       "Chapter 8"
     ],
-    "requires": "|Progressive Chapter:7|"
+    "requires": "|Progressive Chapter:7| or |Leviathan Lagoon|"
   },
   "Chapter 8": {
     "connects_to": [
       "Chapter 9"
     ],
-    "requires": "|Progressive Chapter:8|"
+    "requires": "|Progressive Chapter:8| or |Crystal Eye Castle|"
   },
   "Chapter 9": {
     "connects_to": [
       "Chapter 10"
     ],
-    "requires": "|Progressive Chapter:9|"
+    "requires": "|Progressive Chapter:9| or |Stonetown|"
   },
   "Chapter 10": {
     "connects_to": [
       "Chapter 11"
     ],
-    "requires": "|Progressive Chapter:10|"
+    "requires": "|Progressive Chapter:10| or |Treetop Terrace|"
   },
   "Chapter 11": {
     "connects_to": [
       "Chapter 12"
     ],
-    "requires": "|Progressive Chapter:11|"
+    "requires": "|Progressive Chapter:11| or |Falling Forest|"
   },
   "Chapter 12": {
     "connects_to": [
       "Chapter 13"
     ],
-    "requires": "|Progressive Chapter:12|"
+    "requires": "|Progressive Chapter:12| or |Troll Warehouse|"
   },
   "Chapter 13": {
     "connects_to": [
       "Chapter 14"
     ],
-    "requires": "|Progressive Chapter:13|"
+    "requires": "|Progressive Chapter:13| or |Goo Factory|"
   },
   "Chapter 14": {
     "connects_to": [
       "Chapter 15"
     ],
-    "requires": "|Progressive Chapter:14|"
+    "requires": "|Progressive Chapter:14| or |Battlefield|"
   },
   "Chapter 15": {
     "connects_to": [
       "Chapter 16"
     ],
-    "requires": "|Progressive Chapter:15|"
+    "requires": "|Progressive Chapter:15| or |Crawling Catacombs|"
   },
   "Chapter 16": {
     "connects_to": [
       "Chapter 17"
     ],
-    "requires": "|Progressive Chapter:16|"
+    "requires": "|Progressive Chapter:16| or |Cadaverous Crypt|"
   },
   "Chapter 17": {
     "connects_to": [
       "Chapter 18"
     ],
-    "requires": "|Progressive Chapter:17|"
+    "requires": "|Progressive Chapter:17| or |Creepy Citadel|"
   },
   "Chapter 18": {
     "connects_to": [
       "Chapter 19"
     ],
-    "requires": "|Progressive Chapter:18|"
+    "requires": "|Progressive Chapter:18| or |Molekin Mine|"
   },
   "Chapter 19": {
     "connects_to": [
       "Chapter 20"
     ],
-    "requires": "|Progressive Chapter:19|"
+    "requires": "|Progressive Chapter:19| or |Lava Lakes Railway|"
   },
   "Chapter 20": {
     "connects_to": [
       "Chapter 21"
     ],
-    "requires": "|Progressive Chapter:20|"
+    "requires": "|Progressive Chapter:20| or |Quicksilver Vault|"
   },
   "Chapter 21": {
     "connects_to": [
       "Chapter 22"
     ],
-    "requires": "|Progressive Chapter:21|"
+    "requires": "|Progressive Chapter:21| or |Arkeyan Armory|"
   },
   "Chapter 22": {
     "connects_to": [],
-    "requires": "|Progressive Chapter:22|"
+    "requires": "|Progressive Chapter:22| or |Lair of Kaos|"
   },
   "Final Boss": {
     "connects_to": [],
-    "requires": "|Progressive Chapter:22|"
+    "requires": "|Progressive Chapter:22| or ({OptOneDynamic(Core of Light Fragment:chapters_to_beat)} and {YamlDisabled(linear_mode)})"
   },
 
 
@@ -155,7 +155,7 @@
   },
   "Darklight Crypt": {
     "connects_to": [],
-    "requires": "|Darklight Crypt| and (|Progressive Chapter:4| or {YamlDisabled(linear_mode)})"
+    "requires": "|Darklight Crypt| and (|Progressive Chapter:2| or {YamlDisabled(linear_mode)})"
   },
   "Dragon's Peak": {
     "connects_to": [],

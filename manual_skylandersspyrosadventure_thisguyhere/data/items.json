@@ -3,7 +3,183 @@
 		"count": "24",
 		"name": "Progressive Chapter",
 		"category": [
-			"Chapter"
+			"Chapter", "Linear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Shattered Island",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Perilous Pastures",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Sky Schooner Docks",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Stormy Stronghold",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Oilspill Island",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Dark Water Cove",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Leviathan Lagoon",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Crystal Eye Castle",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Stonetown",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Treetop Terrace",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Falling Forest",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Troll Warehouse",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Goo Factory",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Battlefield",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Crawling Catacombs",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Cadaverous Crypt",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Creepy Citadel",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Molekin Mine",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Lava Lakes Railway",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Quicksilver Vault",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Arkeyan Armory",
+		"category": [
+			"Chapter", "Nonlinear"
+		],
+		"progression": true
+	},
+	{
+		"count": "1",
+		"name": "Lair of Kaos",
+		"category": [
+			"Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -15,7 +191,7 @@
 		"category": [
 			"Empire of Ice Pack", "Chapter"
 		],
-		"progression": true
+		"progression_skip_balancing": true
 	},
 	{
 		"count": "1",
@@ -23,7 +199,7 @@
 		"category": [
 			"Pirate Seas Pack", "Chapter"
 		],
-		"progression": true
+		"progression_skip_balancing": true
 	},
 	{
 		"count": "1",
@@ -31,7 +207,7 @@
 		"category": [
 			"Darklight Crypt Pack", "Chapter"
 		],
-		"progression": true
+		"progression_skip_balancing": true
 	},
 	{
 		"count": "1",
@@ -39,23 +215,263 @@
 		"category": [
 			"Dragon's Peak Pack", "Chapter"
 		],
-		"progression": true
+		"progression_skip_balancing": true
 	},
 
 
 	{
-		"count": "22",
-		"name": "Progressive Soul Abilities",
+		"name": "Soul Ability - Lightning Rod",
+		"count": "1",
 		"category": [
-			"Soul Abilities"
+			"Upgrade"
 		],
 		"useful": true
 	},
 	{
+		"name": "Soul Ability - Sonic Boom",
 		"count": "1",
-		"name": "Adventure Pack Soul Abilities",
 		"category": [
-			"Soul Abilities", "Add-on"
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Warnado",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Whirlwind",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Bash",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Dino-Rang",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Prism Break",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Terrafin",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Eruptor",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Flameslinger",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Ignitor",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Sunburn",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Camo",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Stealth Elf",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Stump Smash",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Zook",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Double Trouble",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Spyro",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Voodood",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Wrecking Ball",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Boomer",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Drill Sergeant",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Drobot",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Trigger Happy",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Chop Chop",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Cynder",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Ghost Roaster",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Hex",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Gill Grunt",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Slam Bam",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Wham-Shell",
+		"count": "1",
+		"category": [
+			"Upgrade"
+		],
+		"useful": true
+	},
+	{
+		"name": "Soul Ability - Zap",
+		"count": "1",
+		"category": [
+			"Upgrade"
 		],
 		"useful": true
 	},
@@ -606,5 +1022,14 @@
 			"Traps"
 		],
 		"trap": true
+	},
+	
+	{
+		"count": 26,
+		"name": "Core of Light Fragment",
+		"category": [
+			"Nonlinear"
+		],
+		"progression": true
 	}
 ]
