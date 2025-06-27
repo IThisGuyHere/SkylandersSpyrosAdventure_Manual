@@ -5,8 +5,8 @@
   "filler_item_name": "Sheep",
   "starting_items": [
     {
-      "items": [
-        "Progressive Chapter"
+      "item_categories": [
+        "Chapter"
       ],
       "random": 1
     },

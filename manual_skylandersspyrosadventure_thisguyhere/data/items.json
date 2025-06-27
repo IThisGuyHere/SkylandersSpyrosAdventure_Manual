@@ -557,7 +557,7 @@
 		"count": 1,
 		"name": "All Fire Skylanders",
 		"category": [
-			"Element", "Skylander - Fire"
+			"Element", "Skylander - Fire", "Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -565,7 +565,7 @@
 		"count": 1,
 		"name": "All Water Skylanders",
 		"category": [
-			"Element", "Skylander - Water"
+			"Element", "Skylander - Water", "Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -573,7 +573,7 @@
 		"count": 1,
 		"name": "All Earth Skylanders",
 		"category": [
-			"Element", "Skylander - Earth"
+			"Element", "Skylander - Earth", "Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -581,7 +581,7 @@
 		"count": 1,
 		"name": "All Air Skylanders",
 		"category": [
-			"Element", "Skylander - Air"
+			"Element", "Skylander - Air", "Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -597,7 +597,7 @@
 		"count": 1,
 		"name": "All Undead Skylanders",
 		"category": [
-			"Element", "Skylander - Undead"
+			"Element", "Skylander - Undead", "Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -605,7 +605,7 @@
 		"count": 1,
 		"name": "All Tech Skylanders",
 		"category": [
-			"Element", "Skylander - Tech"
+			"Element", "Skylander - Tech", "Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -613,7 +613,7 @@
 		"count": 1,
 		"name": "All Magic Skylanders",
 		"category": [
-			"Element", "Skylander - Magic"
+			"Element", "Skylander - Magic", "Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
@@ -831,7 +831,8 @@
 		"name": "Warnado",
 		"category": [
 			"Skylander", 
-			"Skylander - Air"
+			"Skylander - Air",
+			"Skylander - Fast"
 		],
 		"progression_skip_balancing": true
 	},
