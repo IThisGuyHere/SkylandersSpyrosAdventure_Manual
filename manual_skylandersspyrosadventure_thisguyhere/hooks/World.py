@@ -3,7 +3,7 @@ from worlds.AutoWorld import World
 from BaseClasses import MultiWorld, CollectionState, ItemClassification
 
 # Object classes from Manual -- extending AP core -- representing items and locations that are used in generation
-from ..Items import ManualItem
+from ..Items import ManualItem, item_name_to_item
 from ..Locations import ManualLocation
 
 # Raw JSON data from the Manual apworld, respectively:
@@ -12,10 +12,12 @@ from ..Locations import ManualLocation
 from ..Data import game_table, item_table, location_table, region_table
 
 # These helper methods allow you to determine if an option has been set, or what its value is, for any player in the multiworld
-from ..Helpers import is_option_enabled, get_option_value, is_location_name_enabled, is_item_name_enabled
+from ..Helpers import is_option_enabled, get_option_value, is_location_name_enabled, is_item_name_enabled, clamp
 
 # calling logging.info("message") anywhere below in this file will output the message to both console and log file
 import logging
+
+import random
 
 ########################################################################################
 ## Order of method calls when the world generates:
@@ -139,38 +141,26 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
     # to the list multiple times if you want to remove multiple copies of it.
 
 
-    # if playing nonlinear mode, we need to place Core of Light Fragments in the chapter locations and remove any extras
+    # if playing nonlinear mode, we first need to remove any extra core fragments
     if not get_option_value(multiworld, player, "linear_mode"):
 
-        extra_map_frags = (4 - get_option_value(multiworld, player, "include_empire") - 
+        extra_core_frag_count = (4 - get_option_value(multiworld, player, "include_empire") - 
                            get_option_value(multiworld, player, "include_ship") - 
                            get_option_value(multiworld, player, "include_crypt") - 
                            get_option_value(multiworld, player, "include_peak"))
         
-        for i in range(extra_map_frags):
+        for i in range(extra_core_frag_count):
             itemNamesToRemove.append("Core of Light Fragment")
-
-        for location in location_table:
-            if "Level Completion" in location["category"] and is_location_name_enabled(multiworld,player,location["name"]): 
-                level = multiworld.get_location(location["name"], player)
-                item_to_place = next(i for i in item_pool if i.name == "Core of Light Fragment")
-                level.place_locked_item(item_to_place)
-                item_pool.remove(item_to_place)
-
-
 
     for itemName in itemNamesToRemove:
         item = next(i for i in item_pool if i.name == itemName)
         item_pool.remove(item)
 
-
     # since the traps are weight-based, trap and filler generation needs to be overridden here
-    
     extras = len(multiworld.get_unfilled_locations(player=player)) - len(item_pool)
 
     if extras > 0:
         traps = [item["name"] for item in item_table if item.get("trap")]
-        filler = [item["name"] for item in item_table if item.get("filler")]
         #filler.append(world.get_filler_item_name())    # not really necessary anymore
         trap_percent = get_option_value(multiworld, player, "filler_traps")
         if not traps:
@@ -194,7 +184,7 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
             item_pool.append(extra_item)
 
         for _ in range(0, filler_count):
-            extra_item = world.create_item(world.random.choice(filler))
+            extra_item = world.create_item(world.get_filler_item_name())
             item_pool.append(extra_item)
 
     return item_pool
@@ -210,6 +200,48 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
 # The complete item pool prior to being set for generation is provided here, in case you want to make changes to it
 def after_create_items(item_pool: list, world: World, multiworld: MultiWorld, player: int) -> list:
     
+    # make bonus Core Fragments into useful items and place all of them in the chapter locations
+    if not get_option_value(multiworld, player, "linear_mode"):
+        core_frags = [i for i in item_pool if i.name == "Core of Light Fragment"]
+        random.shuffle(core_frags)
+        bonus_core_frag_count = len(core_frags) - clamp(int(get_option_value(multiworld, player, "chapters_to_beat")), 1, len(core_frags))
+        for i in range(bonus_core_frag_count):
+            core_frags[i].classification = ItemClassification.useful
+
+        for location in location_table:
+            if "Level Completion" in location["category"] and is_location_name_enabled(multiworld,player,location["name"]): 
+                level = multiworld.get_location(location["name"], player)
+                item_to_place = next(i for i in item_pool if i.name == "Core of Light Fragment")
+                level.place_locked_item(item_to_place)
+                item_pool.remove(item_to_place)
+    # otherwise, make the two extra progressive chapters into useful items
+    else:
+        prog_chapters = [i for i in item_pool if i.name == "Progressive Chapter"]
+        random.shuffle(prog_chapters)
+        for i in range(2):
+            prog_chapters[i].classification = ItemClassification.useful
+
+    '''# make half of the skylanders in each element useful
+    if not get_option_value(multiworld, player, "characters_as_items"):
+        all_skylanders = [item for item in item_table if "category" in item and "Skylander" in item.get("category") and is_item_name_enabled(multiworld,player,item.get("name"))]
+        print(len(item_table))
+        print(len(all_skylanders))
+        random.shuffle(all_skylanders)
+        skylanders = [[]]
+        skylanders.append([item for item in all_skylanders if "Skylander - Fire" in item.get("category")])
+        skylanders.append([item for item in all_skylanders if "Skylander - Water" in item.get("category")])
+        skylanders.append([item for item in all_skylanders if "Skylander - Earth" in item.get("category")])
+        skylanders.append([item for item in all_skylanders if "Skylander - Air" in item.get("category")])
+        skylanders.append([item for item in all_skylanders if "Skylander - Life" in item.get("category")])
+        skylanders.append([item for item in all_skylanders if "Skylander - Undead" in item.get("category")])
+        skylanders.append([item for item in all_skylanders if "Skylander - Tech" in item.get("category")])
+        skylanders.append([item for item in all_skylanders if "Skylander - Magic" in item.get("category")])
+
+        for element in skylanders:
+            print(len(element))
+            for i in range(len(element) // 2):
+                next(i for i in item_pool if i.name == element[i].get("name")).classification = ItemClassification.useful'''
+        
     return item_pool
 
 # Called before rules for accessing regions and locations are created. Not clear why you'd want this, but it's here.

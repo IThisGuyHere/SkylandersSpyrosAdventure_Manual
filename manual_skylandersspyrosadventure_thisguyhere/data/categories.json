@@ -33,7 +33,6 @@
         "hidden": true
     },
     "Element Upgrade": {
-        "yaml_option": ["per_element_upgrades"],
         "hidden": true
     },
     "Skylander": {

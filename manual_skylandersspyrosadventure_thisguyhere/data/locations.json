@@ -1906,7 +1906,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Warnado| or |All Air Characters|"
+			"requires": "|Warnado| or |All Air Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Ghost Roaster",
@@ -1916,7 +1916,7 @@
 				"Add-on",
 				"Darklight Crypt Pack"
 			],
-			"requires": "|Ghost Roaster| or |All Undead Characters|"
+			"requires": "|Ghost Roaster| or |All Undead Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Wrecking Ball",
@@ -1924,7 +1924,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Wrecking Ball| or |All Magic Characters|"
+			"requires": "|Wrecking Ball| or |All Magic Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Spyro",
@@ -1932,7 +1932,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Spyro| or |All Magic Characters|"
+			"requires": "|Spyro| or |All Magic Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Prism Break",
@@ -1940,7 +1940,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Prism Break| or |All Earth Characters|"
+			"requires": "|Prism Break| or |All Earth Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Lightning Rod",
@@ -1948,7 +1948,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Lightning Rod| or |All Air Characters|"
+			"requires": "|Lightning Rod| or |All Air Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Hex",
@@ -1956,7 +1956,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Hex| or |All Undead Characters|"
+			"requires": "|Hex| or |All Undead Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Dino-Rang",
@@ -1964,7 +1964,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Dino-Rang| or |All Earth Characters|"
+			"requires": "|Dino-Rang| or |All Earth Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Bash",
@@ -1972,7 +1972,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Bash| or |All Earth Characters|"
+			"requires": "|Bash| or |All Earth Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Cynder",
@@ -1980,7 +1980,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Cynder| or |All Undead Characters|"
+			"requires": "|Cynder| or |All Undead Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Ignitor",
@@ -1988,7 +1988,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Ignitor| or |All Fire Characters|"
+			"requires": "|Ignitor| or |All Fire Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Stump Smash",
@@ -1996,7 +1996,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Stump Smash| or |All Life Characters|"
+			"requires": "|Stump Smash| or |All Life Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Chop Chop",
@@ -2004,7 +2004,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Chop Chop| or |All Undead Characters|"
+			"requires": "|Chop Chop| or |All Undead Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Sonic Boom",
@@ -2012,7 +2012,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Sonic Boom| or |All Air Characters|"
+			"requires": "|Sonic Boom| or |All Air Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Drobot",
@@ -2020,7 +2020,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Drobot| or |All Tech Characters|"
+			"requires": "|Drobot| or |All Tech Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Terrafin",
@@ -2030,7 +2030,7 @@
 				"Add-on",
 				"Pirate Seas Pack"
 			],
-			"requires": "|Terrafin| or |All Earth Characters|"
+			"requires": "|Terrafin| or |All Earth Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Sunburn",
@@ -2040,7 +2040,7 @@
 				"Add-on",
 				"Dragon's Peak Pack"
 			],
-			"requires": "|Sunburn| or |All Fire Characters|"
+			"requires": "|Sunburn| or |All Fire Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Trigger Happy",
@@ -2048,7 +2048,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Trigger Happy| or |All Tech Characters|"
+			"requires": "|Trigger Happy| or |All Tech Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Eruptor",
@@ -2056,7 +2056,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Eruptor| or |All Fire Characters|"
+			"requires": "|Eruptor| or |All Fire Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Double Trouble",
@@ -2064,7 +2064,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Double Trouble| or |All Magic Characters|"
+			"requires": "|Double Trouble| or |All Magic Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Stealth Elf",
@@ -2072,7 +2072,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Stealth Elf| or |All Life Characters|"
+			"requires": "|Stealth Elf| or |All Life Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Whirlwind",
@@ -2080,7 +2080,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Whirlwind| or |All Air Characters|"
+			"requires": "|Whirlwind| or |All Air Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Voodood",
@@ -2088,7 +2088,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Voodood| or |All Magic Characters|"
+			"requires": "|Voodood| or |All Magic Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Wham-Shell",
@@ -2096,7 +2096,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Wham-Shell| or |All Water Characters|"
+			"requires": "|Wham-Shell| or |All Water Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Camo",
@@ -2104,7 +2104,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Camo| or |All Life Characters|"
+			"requires": "|Camo| or |All Life Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Zook",
@@ -2112,7 +2112,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Zook| or |All Life Characters|"
+			"requires": "|Zook| or |All Life Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Flameslinger",
@@ -2120,7 +2120,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Flameslinger| or |All Fire Characters|"
+			"requires": "|Flameslinger| or |All Fire Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Boomer",
@@ -2128,7 +2128,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Boomer| or |All Tech Characters|"
+			"requires": "|Boomer| or |All Tech Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Gill Grunt",
@@ -2136,7 +2136,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Gill Grunt| or |All Water Characters|"
+			"requires": "|Gill Grunt| or |All Water Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Drill Sergeant",
@@ -2144,7 +2144,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Drill Sergeant| or |All Tech Characters|"
+			"requires": "|Drill Sergeant| or |All Tech Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Slam Bam",
@@ -2154,7 +2154,7 @@
 				"Add-on",
 				"Empire of Ice Pack"
 			],
-			"requires": "|Slam Bam| or |All Water Characters|"
+			"requires": "|Slam Bam| or |All Water Skylanders|"
 		},
 		{
 			"name": "Heroic Challenge - Zap",
@@ -2162,7 +2162,7 @@
 			"category": [
 				"Challenge"
 			],
-			"requires": "|Zap| or |All Water Characters|"
+			"requires": "|Zap| or |All Water Skylanders|"
 		},
 		{
 			"name": "Shattered Island Speedrun",
