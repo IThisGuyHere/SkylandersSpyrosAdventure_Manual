@@ -84,6 +84,63 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
     # Because multiple copies of an item can exist, you need to add an item name
     # to the list multiple times if you want to remove multiple copies of it.
 
+    extraChapterCount = (get_option_value(multiworld, player, "include_empire") + 
+                           get_option_value(multiworld, player, "include_ship") + 
+                           get_option_value(multiworld, player, "include_crypt") + 
+                           get_option_value(multiworld, player, "include_peak"))
+    chaptersToBeat = get_option_value(multiworld, player, "chapters_to_beat")
+    numChaptersToRemove = 22 + extraChapterCount - clamp(get_option_value(multiworld, player, "chapters_in_pool"), chaptersToBeat, 22 + extraChapterCount)
+    chapters = []
+    
+    # for linear mode, get the regions and remove all locations in them
+    if (get_option_value(multiworld, player, "linear_mode")):
+        for i in range(22 - chaptersToBeat):
+            itemNamesToRemove.append("Progressive Chapter")
+        chapters = [region for region in multiworld.regions if region.player == player and "Chapter" in region.name]    # should always have a size of 22
+
+        for chapter in chapters:
+            if int(chapter.name.split(" ")[1]) > chaptersToBeat:
+                for location in list(chapter.locations):
+                    locationNamesToRemove.append(location.name)
+                chapter.set_exits([])
+            elif int(chapter.name.split(" ")[1]) == chaptersToBeat:
+                chapter.set_exits([])
+
+    # for non-linear mode, get the items first, then find the locations with the same names, use that to make a list of the regions they are in and delete everything in those regions
+    else:
+        chapterItemNamesToRemove = []
+        chapterItemNames = [item["name"] for item in item_table if "category" in item and "Chapter" in item.get("category") and is_item_name_enabled(multiworld,player,item.get("name"))]
+        #chapterLocationNames = [location for location in location_table if location["name"] in chapterItemNames]
+        random.shuffle(chapterItemNames)
+        for i in range(numChaptersToRemove):
+            chapterItemNamesToRemove.append(chapterItemNames[i])
+            print("Trying to remove location " + chapterItemNames[i])   # debug
+            chapterLocation = next(l for l in location_table if l["name"] == chapterItemNames[i])
+            chapterLocation["removed"] = True
+            #chapterRegionName = next(l["region"] for l in location_table if l["name"] == chapterItemNames[i])
+
+            chapters.append(multiworld.get_region(chapterLocation["region"], player))
+            itemNamesToRemove.append("Core of Light Fragment")
+
+        for chapter in chapters:
+            for location in list(chapter.locations):
+                locationNamesToRemove.append(location.name)
+            chapter.set_exits([])
+
+        itemNamesToRemove.extend(chapterItemNamesToRemove)
+
+
+    for region in multiworld.regions:
+        if region.player == player:
+            for location in list(region.locations):
+                if location.name in locationNamesToRemove:
+                    region.locations.remove(location)
+    if hasattr(multiworld, "clear_location_cache"):
+        multiworld.clear_location_cache()
+
+
+
+
     # if a character is not in the list and whitelist is enabled OR a character is in the list and whitelist is disabled, remove that item
     names_to_remove = get_option_value(multiworld, player, "characters_to_exclude")
     use_character_whitelist = get_option_value(multiworld, player, "whitelist_characters")
@@ -95,15 +152,10 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
 
     # need to first check if the item is in item_pool
     for item in item_table:
-        #table_item = next(i for i in item_table if i["name"] == item.name)
         if "category" not in item or "Skylander" not in item.get("category") or not is_item_name_enabled(multiworld,player,item.get("name")):
             continue
         item_name = item.get("name")
         character_in_list = False
-        #for char_name in names_to_remove:
-        #    if item_name.casefold() == char_name.casefold():
-        #        character_in_list = True
-        #        break
         if item_name in names_to_remove:
             character_in_list = True
 
@@ -124,6 +176,7 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
             multiworld.clear_location_cache()
 
     for itemName in itemNamesToRemove:
+        print("Trying to remove " + itemName)   # debug
         item = next(i for i in item_pool if i.name == itemName)
         item_pool.remove(item)
         print("Successfully removed " + itemName)   # debug
@@ -209,8 +262,8 @@ def after_create_items(item_pool: list, world: World, multiworld: MultiWorld, pl
             core_frags[i].classification = ItemClassification.useful
 
         for location in location_table:
-            if "Level Completion" in location["category"] and is_location_name_enabled(multiworld,player,location["name"]): 
-                level = multiworld.get_location(location["name"], player)
+            if "removed" not in location and "Level Completion" in location["category"] and is_location_name_enabled(multiworld,player,location["name"]): 
+                level = multiworld.get_location(location["name"], player)       # if the chapter was already removed, the location table doesn't reflect that
                 item_to_place = next(i for i in item_pool if i.name == "Core of Light Fragment")
                 level.place_locked_item(item_to_place)
                 item_pool.remove(item_to_place)
