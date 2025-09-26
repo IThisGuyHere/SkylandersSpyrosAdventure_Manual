@@ -7,7 +7,7 @@ import re
 
 # Sometimes you have a requirement that is just too messy or repetitive to write out with boolean logic.
 # Define a function here, and you can use it in a requires string with {function_name()}.
-def overfishedAnywhere(world: World, multiworld: MultiWorld, state: CollectionState, player: int):
+def overfishedAnywhere(world: World, state: CollectionState, player: int):
     """Has the player collected all fish from any fishing log?"""
     for cat, items in world.item_name_groups:
         if cat.endswith("Fishing Log") and state.has_all(items, player):
@@ -16,7 +16,7 @@ def overfishedAnywhere(world: World, multiworld: MultiWorld, state: CollectionSt
 
 # You can also pass an argument to your function, like {function_name(15)}
 # Note that all arguments are strings, so you'll need to convert them to ints if you want to do math.
-def anyClassLevel(world: World, multiworld: MultiWorld, state: CollectionState, player: int, level: str):
+def anyClassLevel(state: CollectionState, player: int, level: str):
     """Has the player reached the given level in any class?"""
     for item in ["Figher Level", "Black Belt Level", "Thief Level", "Red Mage Level", "White Mage Level", "Black Mage Level"]:
         if state.count(item, player) >= int(level):
@@ -24,11 +24,11 @@ def anyClassLevel(world: World, multiworld: MultiWorld, state: CollectionState, 
     return False
 
 # You can also return a string from your function, and it will be evaluated as a requires string.
-def requiresMelee(world: World, multiworld: MultiWorld, state: CollectionState, player: int):
+def requiresMelee():
     """Returns a requires string that checks if the player has unlocked the tank."""
     return "|Figher Level:15| or |Black Belt Level:15| or |Thief Level:15|"
 
-def OptOneDynamic(world: World, multiworld: MultiWorld, state: CollectionState, player: int, item: str, items_counts: Optional[dict] = None):
+def OptOneDynamic(world: World, multiworld: MultiWorld, player: int, item: str, items_counts: Optional[dict] = None):
     """Check if the passed item (with or without ||) is enabled, then this returns |item:yamlOpt|
     where yamlOpt is the count specified in the yaml option, clamped to the maximum number of said item in the itempool.\n
     Eg. requires: "{OptOne(|DisabledItem|)} and |other items|" become "|DisabledItem:0| and |other items|" if the item is disabled.
@@ -36,7 +36,7 @@ def OptOneDynamic(world: World, multiworld: MultiWorld, state: CollectionState, 
     if item == "":
         return "" #Skip this function if item is left blank
     if not items_counts:
-        items_counts = world.get_item_counts()
+        items_counts = world.get_item_counts(only_progression=True)
 
     require_type = 'item'
 
@@ -63,5 +63,5 @@ def OptOneDynamic(world: World, multiworld: MultiWorld, state: CollectionState, 
     elif require_type == 'item':
         if item_count.isnumeric():
             item_current_count = items_counts.get(item_name, 0)
-            item_count = clamp(int(item_count), 1, item_current_count)
+            item_count = clamp(int(item_count), 1, 26)
         return f"|{item_name}:{item_count}|"

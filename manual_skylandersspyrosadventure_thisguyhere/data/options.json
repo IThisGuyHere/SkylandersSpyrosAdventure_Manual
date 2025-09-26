@@ -1,0 +1,90 @@
+{
+    "$schema": "https://raw.githubusercontent.com/ManualForArchipelago/Manual/main/schemas/Manual.options.schema.json",
+    "_comment": "Add a _ before an option name to comment it out and it wont be added to the apworld",
+    "core": {
+        "goal":{
+            "_comment": [
+                "Using 'goal' as the name of an option lets you override some of the generated goal parameters"
+            ],
+            "display_name": "Goal",
+            "description": [
+                "Choose your victory condition.",
+                "Defeat Kaos: Defeat Kaos...there's not much more to it",
+                "All Levels Perfected: Complete the required number of chapters with three stars"
+            ],
+            "aliases": {"easiest": 0},
+            "hidden": false
+        },
+        "death_link": {
+            "default": false
+        },
+        "filler_traps": {
+            "_comment": "Using values here let you set a 'recommended' filler_trap percentage or even a default percentage",
+            "display_name": "TrapPercent",
+            "description": [
+                "The percentage of fillers to replace with traps. 0 means no traps at all, 100 means all fillers are traps."
+            ],
+            "range_start": 0,
+            "range_end": 100,
+            "default": 50
+        }
+    },
+    "user": {
+        "_commented_out_option":{
+            "type": "Toggle",
+            "default": true
+        },
+        "_Example_Toggle":{
+            "description": [
+                "This is a Toggle",
+                "A simple boolean, aka True or False set the initial value with \"default\""
+            ],
+            "type": "Toggle",
+            "default": false,
+            "group": "Example Options"
+        },
+        "_Example_Choice":{
+            "type": "Choice",
+            "description": [
+                "This is a Choice",
+                "Let the user pick from a list of values",
+                "allow_custom_value let a player define their own text value",
+                "Currently the only use for Choice in Manual outside of hooks is the goal"
+            ],
+            "values": {
+                "start":0,
+                "test":1
+             },
+            "default": 0,
+            "allow_custom_value": false,
+            "group": "Example Options"
+        },
+        "_Example_Range":{
+            "type": "Range",
+            "description": [
+                "This is a Range",
+                "Allow the player to specify a value between 'start' and 'end'",
+                "if you include a \"values\" you can define the label for certain values",
+                "Currently the only use for Range in Manual outside of hooks is 'filler_trap'"
+            ],
+            "range_start": 0,
+            "default": 1,
+            "range_end": 10,
+            "values": {"example": 2},
+            "group": "Example Options"
+        },
+
+        "_DLC_enabled":{
+            "display_name": "DLC Enabled",
+            "description": "Is the Dlc enabled?",
+            "type": "Toggle",
+            "visibility": [
+                "simple_ui",
+                "complex_ui",
+                "template"
+            ],
+            "default": true
+        }
+    }
+
+}

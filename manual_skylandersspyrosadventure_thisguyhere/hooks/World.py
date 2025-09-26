@@ -1,6 +1,6 @@
 # Object classes from AP core, to represent an entire MultiWorld and this individual World that's part of it
 from worlds.AutoWorld import World
-from BaseClasses import MultiWorld, CollectionState, ItemClassification
+from BaseClasses import MultiWorld, CollectionState, Item, ItemClassification
 
 # Object classes from Manual -- extending AP core -- representing items and locations that are used in generation
 from ..Items import ManualItem, item_name_to_item
@@ -12,7 +12,7 @@ from ..Locations import ManualLocation
 from ..Data import game_table, item_table, location_table, region_table
 
 # These helper methods allow you to determine if an option has been set, or what its value is, for any player in the multiworld
-from ..Helpers import is_option_enabled, get_option_value, is_location_name_enabled, is_item_name_enabled, clamp
+from ..Helpers import is_option_enabled, get_option_value, format_state_prog_items_key, ProgItemsCat, is_location_name_enabled, is_item_name_enabled, clamp
 
 # calling logging.info("message") anywhere below in this file will output the message to both console and log file
 import logging
@@ -49,7 +49,6 @@ def after_create_regions(world: World, multiworld: MultiWorld, player: int):
 
     # Add your code here to calculate which locations to remove
         
-
     for region in multiworld.regions:
         if region.player == player:
             for location in list(region.locations):
@@ -59,18 +58,56 @@ def after_create_regions(world: World, multiworld: MultiWorld, player: int):
         multiworld.clear_location_cache()
 
     # in non-linear mode, we need to make the hub the new starting region and connect it to all chapters
-    if not get_option_value(multiworld, player, "linear_mode"):
-        chapters = []
+    if get_option_value(multiworld, player, "linear_mode"):
+        # get rid of the chapter exits in Hub and the hub entrances in the chapters
+       
+        # in linear mode, start by removing the connection between "Manual" and "Hub"
+        hub = multiworld.get_region("Hub", player)
+        manual = multiworld.get_region("Manual", player)
+        manual.exits = [exit for exit in manual.exits if "Hub" not in exit.name]
+        hub.entrances = [entrance for entrance in hub.entrances if "Manual" not in entrance.name.split("To")[0]]
+        
+        # remove the hub link from final boss
+        hub.exits = [exit for exit in hub.exits if "Final Boss" not in exit.name]
+        boss = multiworld.get_region("Final Boss", player)
+        boss.entrances = [entrance for entrance in boss.entrances if "Hub" not in entrance.name]
+
+        # then the connections between "Hub" and the numbered chapters
+        hub.exits = [exit for exit in hub.exits if "Chapter" not in exit.name.split("To", 2)[1]]
         for region in multiworld.regions:
             if region.player == player and "Chapter" in region.name:
-                region.set_exits([])
-                chapters.append(region.name)
-        manual = multiworld.get_region("Manual", player)
-        manual.set_exits([])
-        manual.add_exits(["Hub"])
-
+                region.entrances = [enter for enter in region.entrances if "Hub" not in enter.name.split("To")[0]]
+    else:
+        # in nonlinear mode, start by removing the connection between "Manual" and "Chapter 1"
         hub = multiworld.get_region("Hub", player)
-        hub.add_exits(chapters)    
+        chap_1 = multiworld.get_region("Chapter 1", player)
+        manual = multiworld.get_region("Manual", player)
+        manual.exits = [exit for exit in manual.exits if "Chapter 1" not in exit.name.split("To", 2)[1]]
+        chap_1.entrances = [entrance for entrance in chap_1.entrances if "Manual" not in entrance.name.split("To")[0] and "Final Boss" not in entrance.name]
+
+        # remove the chapter 22 link from final boss
+        #c_22 = multiworld.get_region("Chapter 22", player)
+        #c_22.exits = [exit for exit in c_22.exits if "Final Boss" not in exit.name]
+        boss = multiworld.get_region("Final Boss", player)
+        boss.entrances = [entrance for entrance in boss.entrances if "Chapter 1" not in entrance.name] # was Chapter 22
+
+        # then the connections between each set of numbered chapters
+        hub.entrances = [enter for enter in hub.entrances if "Chapter" not in enter.name.split("To", 2)[0]]
+        for region in multiworld.regions:
+            if region.player == player and "Chapter" in region.name:
+                region.exits = [exit for exit in region.entrances if "Chapter" not in exit.name.split("To", 2)[1] and "Hub" not in exit.name.split("To", 2)[1]]
+                region.entrances = [enter for enter in region.entrances if "Chapter" not in enter.name.split("To", 2)[0]]   
+
+# This hook allows you to access the item names & counts before the items are created. Use this to increase/decrease the amount of a specific item in the pool
+# Valid item_config key/values:
+# {"Item Name": 5} <- This will create qty 5 items using all the default settings
+# {"Item Name": {"useful": 7}} <- This will create qty 7 items and force them to be classified as useful
+# {"Item Name": {"progression": 2, "useful": 1}} <- This will create 3 items, with 2 classified as progression and 1 as useful
+# {"Item Name": {0b0110: 5}} <- If you know the special flag for the item classes, you can also define non-standard options. This setup
+#       will create 5 items that are the "useful trap" class
+# {"Item Name": {ItemClassification.useful: 5}} <- You can also use the classification directly
+def before_create_items_all(item_config: dict[str, int|dict], world: World, multiworld: MultiWorld, player: int) -> dict[str, int|dict]:
+    return item_config
 
 # The item pool before starting items are processed, in case you want to see the raw item pool at that stage
 def before_create_items_starting(item_pool: list, world: World, multiworld: MultiWorld, player: int) -> list:
@@ -192,7 +229,6 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
     #
     # Because multiple copies of an item can exist, you need to add an item name
     # to the list multiple times if you want to remove multiple copies of it.
-
 
     # if playing nonlinear mode, we first need to remove any extra core fragments
     if not get_option_value(multiworld, player, "linear_mode"):
@@ -330,11 +366,27 @@ def after_create_item(item: ManualItem, world: World, multiworld: MultiWorld, pl
     return item
 
 # This method is run towards the end of pre-generation, before the place_item options have been handled and before AP generation occurs
-def before_generate_basic(world: World, multiworld: MultiWorld, player: int) -> list:
+def before_generate_basic(world: World, multiworld: MultiWorld, player: int):
     pass
 
 # This method is run at the very end of pre-generation, once the place_item options have been handled and before AP generation occurs
 def after_generate_basic(world: World, multiworld: MultiWorld, player: int):
+    pass
+
+# This method is run every time an item is added to the state, can be used to modify the value of an item.
+# IMPORTANT! Any changes made in this hook must be cancelled/undone in after_remove_item
+def after_collect_item(world: World, state: CollectionState, Changed: bool, item: Item):
+    # the following let you add to the Potato Item Value count
+    # if item.name == "Cooked Potato":
+    #     state.prog_items[item.player][format_state_prog_items_key(ProgItemsCat.VALUE, "Potato")] += 1
+    pass
+
+# This method is run every time an item is removed from the state, can be used to modify the value of an item.
+# IMPORTANT! Any changes made in this hook must be first done in after_collect_item
+def after_remove_item(world: World, state: CollectionState, Changed: bool, item: Item):
+    # the following let you undo the addition to the Potato Item Value count
+    # if item.name == "Cooked Potato":
+    #     state.prog_items[item.player][format_state_prog_items_key(ProgItemsCat.VALUE, "Potato")] -= 1
     pass
 
 # This is called before slot data is set and provides an empty dict ({}), in case you want to modify it before Manual does
