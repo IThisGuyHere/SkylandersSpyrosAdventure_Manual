@@ -3,7 +3,7 @@
 		"count": "24",
 		"name": "Progressive Chapter",
 		"category": [
-			"Chapter", "Linear"
+			"Chapter", "Base Chapter", "Linear"
 		],
 		"progression": true
 	},
@@ -11,7 +11,7 @@
 		"count": "1",
 		"name": "Shattered Island",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -19,7 +19,7 @@
 		"count": "1",
 		"name": "Perilous Pastures",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -27,7 +27,7 @@
 		"count": "1",
 		"name": "Sky Schooner Docks",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -35,7 +35,7 @@
 		"count": "1",
 		"name": "Stormy Stronghold",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -43,7 +43,7 @@
 		"count": "1",
 		"name": "Oilspill Island",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -51,7 +51,7 @@
 		"count": "1",
 		"name": "Dark Water Cove",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -59,7 +59,7 @@
 		"count": "1",
 		"name": "Leviathan Lagoon",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -67,7 +67,7 @@
 		"count": "1",
 		"name": "Crystal Eye Castle",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -75,7 +75,7 @@
 		"count": "1",
 		"name": "Stonetown",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -83,7 +83,7 @@
 		"count": "1",
 		"name": "Treetop Terrace",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -91,7 +91,7 @@
 		"count": "1",
 		"name": "Falling Forest",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -99,7 +99,7 @@
 		"count": "1",
 		"name": "Troll Warehouse",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -107,7 +107,7 @@
 		"count": "1",
 		"name": "Goo Factory",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -115,7 +115,7 @@
 		"count": "1",
 		"name": "Battlefield",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -123,7 +123,7 @@
 		"count": "1",
 		"name": "Crawling Catacombs",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -131,7 +131,7 @@
 		"count": "1",
 		"name": "Cadaverous Crypt",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -139,7 +139,7 @@
 		"count": "1",
 		"name": "Creepy Citadel",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -147,7 +147,7 @@
 		"count": "1",
 		"name": "Molekin Mine",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -155,7 +155,7 @@
 		"count": "1",
 		"name": "Lava Lakes Railway",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -163,7 +163,7 @@
 		"count": "1",
 		"name": "Quicksilver Vault",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -171,7 +171,7 @@
 		"count": "1",
 		"name": "Arkeyan Armory",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},
@@ -179,7 +179,7 @@
 		"count": "1",
 		"name": "Lair of Kaos",
 		"category": [
-			"Chapter", "Nonlinear"
+			"Chapter", "Base Chapter", "Nonlinear"
 		],
 		"progression": true
 	},

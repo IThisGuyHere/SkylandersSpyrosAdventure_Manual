@@ -125,23 +125,25 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
                            get_option_value(multiworld, player, "include_ship") + 
                            get_option_value(multiworld, player, "include_crypt") + 
                            get_option_value(multiworld, player, "include_peak"))
-    chaptersToBeat = get_option_value(multiworld, player, "chapters_to_beat")
-    numChaptersToRemove = 22 + extraChapterCount - clamp(get_option_value(multiworld, player, "chapters_in_pool"), chaptersToBeat, 22 + extraChapterCount)
+    chaptersToBeat = min(22 + extraChapterCount, get_option_value(multiworld, player, "chapters_in_pool"), get_option_value(multiworld, player, "chapters_to_beat"))
+    numChaptersToRemove = 22 + extraChapterCount - min(22 + extraChapterCount, get_option_value(multiworld, player, "chapters_in_pool"))
     chapters = []
+    #chaptersToRemove = []
     
     # for linear mode, get the regions and remove all locations in them
     if (get_option_value(multiworld, player, "linear_mode")):
-        for i in range(22 - chaptersToBeat):
+        for i in range(22 - get_option_value(multiworld, player, "chapters_in_pool")):
             itemNamesToRemove.append("Progressive Chapter")
         chapters = [region for region in multiworld.regions if region.player == player and "Chapter" in region.name]    # should always have a size of 22
 
         for chapter in chapters:
-            if int(chapter.name.split(" ")[1]) > chaptersToBeat:
+            if int(chapter.name.split(" ")[1]) > get_option_value(multiworld, player, "chapters_in_pool"):
                 for location in list(chapter.locations):
                     locationNamesToRemove.append(location.name)
-                chapter.set_exits([])
-            elif int(chapter.name.split(" ")[1]) == chaptersToBeat:
-                chapter.set_exits([])
+                #chapter.set_exits([])   # this doesn't need to be here
+                #chaptersToRemove.append(chapter)
+            #elif int(chapter.name.split(" ")[1]) == chaptersToBeat:     # need to modify the rule later
+            #    chapter.set_exits([])   # this doesn't need to be here
 
     # for non-linear mode, get the items first, then find the locations with the same names, use that to make a list of the regions they are in and delete everything in those regions
     else:
@@ -158,11 +160,12 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
 
             chapters.append(multiworld.get_region(chapterLocation["region"], player))
             itemNamesToRemove.append("Core of Light Fragment")
+            #chaptersToRemove.append(chapter)
 
-        for chapter in chapters:
+        for chapter in chapters:        # this whole thing needs to be moved out of the condition because linear mode needs it, too
             for location in list(chapter.locations):
                 locationNamesToRemove.append(location.name)
-            chapter.set_exits([])
+            #chapter.set_exits([])   # this doesn't need to be here
 
         itemNamesToRemove.extend(chapterItemNamesToRemove)
 
@@ -175,6 +178,8 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
     if hasattr(multiworld, "clear_location_cache"):
         multiworld.clear_location_cache()
 
+    #for region in chaptersToRemove:                 # this HAS to be done in after_set_rules
+    #    del(multiworld.regions.region_cache[player][region.name])
 
 
 
@@ -356,6 +361,30 @@ def after_set_rules(world: World, multiworld: MultiWorld, player: int):
     # location.access_rule = lambda state: old_rule(state) and Example_Rule(state)
     # OR
     # location.access_rule = lambda state: old_rule(state) or Example_Rule(state)
+
+    # we have to remove chapters here because it fails if you do it any earlier
+    chaptersToRemove = []
+
+    if (get_option_value(multiworld, player, "linear_mode")):
+        
+        extraChapterCount = (get_option_value(multiworld, player, "include_empire") + 
+                           get_option_value(multiworld, player, "include_ship") + 
+                           get_option_value(multiworld, player, "include_crypt") + 
+                           get_option_value(multiworld, player, "include_peak"))
+        
+        chapters = [region for region in multiworld.regions if region.player == player and "Chapter" in region.name]    # should always have a size of 22
+
+        for chapter in chapters:
+            if int(chapter.name.split(" ")[1]) > min(22 + extraChapterCount, 
+                                                     get_option_value(multiworld, player, "chapters_in_pool")):
+                chaptersToRemove.append(chapter)
+    else:
+        chapterLocations = [l for l in location_table if "removed" in l.keys()]
+        
+        chaptersToRemove.extend(multiworld.get_region(chapterLocation["region"], player) for chapterLocation in chapterLocations)
+
+    for region in chaptersToRemove:                 
+        del(multiworld.regions.region_cache[player][region.name])
 
 # The item name to create is provided before the item is created, in case you want to make changes to it
 def before_create_item(item_name: str, world: World, multiworld: MultiWorld, player: int) -> str:

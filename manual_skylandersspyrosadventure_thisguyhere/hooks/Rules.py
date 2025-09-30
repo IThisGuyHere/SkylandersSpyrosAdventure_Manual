@@ -63,5 +63,9 @@ def OptOneDynamic(world: World, multiworld: MultiWorld, player: int, item: str, 
     elif require_type == 'item':
         if item_count.isnumeric():
             item_current_count = items_counts.get(item_name, 0)
-            item_count = clamp(int(item_count), 1, 26)
+            extraChapterCount = (get_option_value(multiworld, player, "include_empire") + 
+                           get_option_value(multiworld, player, "include_ship") + 
+                           get_option_value(multiworld, player, "include_crypt") + 
+                           get_option_value(multiworld, player, "include_peak"))
+            item_count = clamp(int(item_count), 1, min(22, get_option_value(multiworld, player, "chapters_in_pool")))
         return f"|{item_name}:{item_count}|"

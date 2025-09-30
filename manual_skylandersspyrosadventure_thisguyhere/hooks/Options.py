@@ -59,7 +59,7 @@ class NumChaptersInPool(Range):
     This cannot be less than chapters_to_beat, and will be increased if necessary.
     This option is designed for synchronous multiworlds, and only affects non-linear mode.
     Each chapter removed will significantly reduce the amound of locations. As a safeguard, you may not remove more than half of the chapters."""
-    display_name = "Chapters to Remove"
+    display_name = "Chapters In Pool"
     range_start = 14
     range_end = 26
     default = 22
