@@ -133,7 +133,7 @@
   },
   "Final Boss": {
     "connects_to": [],
-    "requires": "({OptOneDynamic(Progressive Chapter:chapters_to_beat)} and {YamlEnabled(linear_mode)}) or ({OptOneDynamic(Core of Light Fragment:chapters_to_beat)} and {YamlDisabled(linear_mode)})"
+    "requires": "({OptOneDynamic(Progressive Chapter:chapters_to_beat)} and {YamlEnabled(linear_mode)} and {OptAll(|Darklight Crypt| and |Empire of Ice| and |Pirate Seas| and |Dragon's Peak|)}) or ({OptOneDynamic(Core of Light Fragment:chapters_to_beat)} and {YamlDisabled(linear_mode)})"
   },
 
 

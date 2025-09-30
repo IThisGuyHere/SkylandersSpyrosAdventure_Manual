@@ -21,6 +21,9 @@
     "Chapter": {
         "hidden": false
     },
+    "Base Chapter": {
+        "hidden": true
+    },
     "Linear": {
         "yaml_option": ["linear_mode"],
         "hidden": true
