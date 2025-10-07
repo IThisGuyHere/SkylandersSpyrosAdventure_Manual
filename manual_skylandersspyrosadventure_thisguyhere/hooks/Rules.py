@@ -28,7 +28,7 @@ def requiresMelee():
     """Returns a requires string that checks if the player has unlocked the tank."""
     return "|Figher Level:15| or |Black Belt Level:15| or |Thief Level:15|"
 
-def OptOneDynamic(world: World, multiworld: MultiWorld, player: int, item: str, items_counts: Optional[dict] = None):
+def OptOneDynamic(world: "ManualWorld", multiworld: MultiWorld, state: CollectionState, player: int, item: str, items_counts: Optional[dict] = None):
     """Check if the passed item (with or without ||) is enabled, then this returns |item:yamlOpt|
     where yamlOpt is the count specified in the yaml option, clamped to the maximum number of said item in the itempool.\n
     Eg. requires: "{OptOne(|DisabledItem|)} and |other items|" become "|DisabledItem:0| and |other items|" if the item is disabled.
@@ -67,5 +67,6 @@ def OptOneDynamic(world: World, multiworld: MultiWorld, player: int, item: str, 
                            get_option_value(multiworld, player, "include_ship") + 
                            get_option_value(multiworld, player, "include_crypt") + 
                            get_option_value(multiworld, player, "include_peak"))
-            item_count = clamp(int(item_count), 1, min(22, get_option_value(multiworld, player, "chapters_in_pool")))
+            item_count = clamp(int(item_count), 1, min(22, get_option_value(multiworld, player, "chapters_in_pool")) 
+                               if get_option_value(multiworld, player, "linear_mode") else get_option_value(multiworld, player, "chapters_in_pool"))
         return f"|{item_name}:{item_count}|"
