@@ -67,6 +67,8 @@ def OptOneDynamic(world: "ManualWorld", multiworld: MultiWorld, state: Collectio
                            get_option_value(multiworld, player, "include_ship") + 
                            get_option_value(multiworld, player, "include_crypt") + 
                            get_option_value(multiworld, player, "include_peak"))
-            item_count = clamp(int(item_count), 1, min(22, get_option_value(multiworld, player, "chapters_in_pool")) 
-                               if get_option_value(multiworld, player, "linear_mode") else get_option_value(multiworld, player, "chapters_in_pool"))
+            total_required_items = min(22 if get_option_value(multiworld, player, "linear_mode") else 22 + extraChapterCount, 
+                                           get_option_value(multiworld, player, "chapters_in_pool"), 
+                                           get_option_value(multiworld, player, "chapters_to_beat"))
+            item_count = clamp(int(item_count), 1, total_required_items)
         return f"|{item_name}:{item_count}|"

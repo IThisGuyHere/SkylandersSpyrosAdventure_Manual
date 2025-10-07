@@ -127,46 +127,39 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
                            get_option_value(multiworld, player, "include_ship") + 
                            get_option_value(multiworld, player, "include_crypt") + 
                            get_option_value(multiworld, player, "include_peak"))
-    #chaptersToBeat = min(22 + extraChapterCount, get_option_value(multiworld, player, "chapters_in_pool"), get_option_value(multiworld, player, "chapters_to_beat"))
-    numChaptersToRemove = 22 + extraChapterCount - min(22 + extraChapterCount, get_option_value(multiworld, player, "chapters_in_pool"))
+    total_chapters_in_pool = min(22 + extraChapterCount, get_option_value(multiworld, player, "chapters_in_pool"))
+
     chapters = []
-    #chaptersToRemove = []
     
     # for linear mode, get the regions and remove all locations in them
-    if (get_option_value(multiworld, player, "linear_mode")):
-        for i in range(22 - get_option_value(multiworld, player, "chapters_in_pool")):
+    if (get_option_value(multiworld, player, "linear_mode")):  
+        numStoryChaptersToRemove = 22 - total_chapters_in_pool  # totalStoryChapters = total_chapters_in_pool - extraChapterCount
+        for i in range(numStoryChaptersToRemove):
             itemNamesToRemove.append("Progressive Chapter")
         chapters = [region for region in multiworld.regions if region.player == player and "Chapter" in region.name]    # should always have a size of 22
 
         for chapter in chapters:
-            if int(chapter.name.split(" ")[1]) > get_option_value(multiworld, player, "chapters_in_pool"):
+            if int(chapter.name.split(" ")[1]) > total_chapters_in_pool - extraChapterCount:
                 for location in list(chapter.locations):
                     locationNamesToRemove.append(location.name)
-                #chapter.set_exits([])   # this doesn't need to be here
-                #chaptersToRemove.append(chapter)
-            #elif int(chapter.name.split(" ")[1]) == chaptersToBeat:     # need to modify the rule later
-            #    chapter.set_exits([])   # this doesn't need to be here
 
     # for non-linear mode, get the items first, then find the locations with the same names, use that to make a list of the regions they are in and delete everything in those regions
     else:
+        numChaptersToRemove = 22 + extraChapterCount - total_chapters_in_pool
         chapterItemNamesToRemove = []
         chapterItemNames = [item["name"] for item in item_table if "category" in item and "Chapter" in item.get("category") and is_item_name_enabled(multiworld,player,item.get("name"))]
-        #chapterLocationNames = [location for location in location_table if location["name"] in chapterItemNames]
         random.shuffle(chapterItemNames)
         for i in range(numChaptersToRemove):
             chapterItemNamesToRemove.append(chapterItemNames[i])
             chapterLocation = next(l for l in location_table if l["name"] == chapterItemNames[i])
             chapterLocation["removed"] = True
-            #chapterRegionName = next(l["region"] for l in location_table if l["name"] == chapterItemNames[i])
 
             chapters.append(multiworld.get_region(chapterLocation["region"], player))
             itemNamesToRemove.append("Core of Light Fragment")
-            #chaptersToRemove.append(chapter)
 
-        for chapter in chapters:        # this whole thing needs to be moved out of the condition because linear mode needs it, too
+        for chapter in chapters:        
             for location in list(chapter.locations):
                 locationNamesToRemove.append(location.name)
-            #chapter.set_exits([])   # this doesn't need to be here
 
         itemNamesToRemove.extend(chapterItemNamesToRemove)
 
@@ -290,11 +283,18 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
 # The complete item pool prior to being set for generation is provided here, in case you want to make changes to it
 def after_create_items(item_pool: list, world: World, multiworld: MultiWorld, player: int) -> list:
     
+    extraChapterCount = (get_option_value(multiworld, player, "include_empire") + 
+                           get_option_value(multiworld, player, "include_ship") + 
+                           get_option_value(multiworld, player, "include_crypt") + 
+                           get_option_value(multiworld, player, "include_peak"))
+
     # make bonus Core Fragments into useful items and place all of them in the chapter locations
     if not get_option_value(multiworld, player, "linear_mode"):
+        total_required_fragments = min(22 + extraChapterCount, get_option_value(multiworld, player, "chapters_in_pool"), get_option_value(multiworld, player, "chapters_to_beat"))
+        
         core_frags = [i for i in item_pool if i.name == "Core of Light Fragment"]
         random.shuffle(core_frags)
-        bonus_core_frag_count = len(core_frags) - clamp(int(get_option_value(multiworld, player, "chapters_to_beat")), 1, len(core_frags))
+        bonus_core_frag_count = len(core_frags) - clamp(total_required_fragments, 1, len(core_frags))
         for i in range(bonus_core_frag_count):
             core_frags[i].classification = ItemClassification.useful
 
@@ -304,11 +304,15 @@ def after_create_items(item_pool: list, world: World, multiworld: MultiWorld, pl
                 item_to_place = next(i for i in item_pool if i.name == "Core of Light Fragment")
                 level.place_locked_item(item_to_place)
                 item_pool.remove(item_to_place)
-    # otherwise, make the extra progressive chapters into useful items (this skyrockets the failure rate)
+    # otherwise, make the extra progressive chapters into useful items  (causes generation failures and I don't know why)
     #else:
+    #    total_story_chapters = min(22, get_option_value(multiworld, player, "chapters_in_pool"), get_option_value(multiworld, player, "chapters_to_beat")) - extraChapterCount
+    #
     #    prog_chapters = [i for i in item_pool if i.name == "Progressive Chapter"]
     #    random.shuffle(prog_chapters)
-    #    for i in range(2):
+    #    print(len(prog_chapters))
+    #    bonus_chapter_count = len(prog_chapters) - clamp(total_story_chapters, 1, len(prog_chapters))
+    #    for i in range(bonus_chapter_count):
     #        prog_chapters[i].classification = ItemClassification.useful
 
     '''# make half of the skylanders in each element useful
@@ -372,7 +376,7 @@ def after_set_rules(world: World, multiworld: MultiWorld, player: int):
 
         for chapter in chapters:
             if int(chapter.name.split(" ")[1]) > min(22 + extraChapterCount, 
-                                                     get_option_value(multiworld, player, "chapters_in_pool")):
+                                                     get_option_value(multiworld, player, "chapters_in_pool")) - extraChapterCount:
                 chaptersToRemove.append(chapter)
     else:
         chapterLocations = [l for l in location_table if "removed" in l.keys()]
