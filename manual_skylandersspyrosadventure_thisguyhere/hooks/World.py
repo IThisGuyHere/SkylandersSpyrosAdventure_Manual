@@ -45,7 +45,7 @@ def before_create_regions(world: World, multiworld: MultiWorld, player: int):
 # Called after regions and locations are created, in case you want to see or modify that information. Victory location is included.
 def after_create_regions(world: World, multiworld: MultiWorld, player: int):
     # Use this hook to remove locations from the world
-    locationNamesToRemove = [] # List of location names
+    locationNamesToRemove: list[str] = [] # List of location names
 
     # Add your code here to calculate which locations to remove
         
@@ -98,6 +98,8 @@ def after_create_regions(world: World, multiworld: MultiWorld, player: int):
                 region.exits = [exit for exit in region.entrances if "Chapter" not in exit.name.split("To", 2)[1] and "Hub" not in exit.name.split("To", 2)[1]]
                 region.entrances = [enter for enter in region.entrances if "Chapter" not in enter.name.split("To", 2)[0]]   
 
+
+
 # This hook allows you to access the item names & counts before the items are created. Use this to increase/decrease the amount of a specific item in the pool
 # Valid item_config key/values:
 # {"Item Name": 5} <- This will create qty 5 items using all the default settings
@@ -125,7 +127,7 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
                            get_option_value(multiworld, player, "include_ship") + 
                            get_option_value(multiworld, player, "include_crypt") + 
                            get_option_value(multiworld, player, "include_peak"))
-    chaptersToBeat = min(22 + extraChapterCount, get_option_value(multiworld, player, "chapters_in_pool"), get_option_value(multiworld, player, "chapters_to_beat"))
+    #chaptersToBeat = min(22 + extraChapterCount, get_option_value(multiworld, player, "chapters_in_pool"), get_option_value(multiworld, player, "chapters_to_beat"))
     numChaptersToRemove = 22 + extraChapterCount - min(22 + extraChapterCount, get_option_value(multiworld, player, "chapters_in_pool"))
     chapters = []
     #chaptersToRemove = []
@@ -153,7 +155,6 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
         random.shuffle(chapterItemNames)
         for i in range(numChaptersToRemove):
             chapterItemNamesToRemove.append(chapterItemNames[i])
-            print("Trying to remove location " + chapterItemNames[i])   # debug
             chapterLocation = next(l for l in location_table if l["name"] == chapterItemNames[i])
             chapterLocation["removed"] = True
             #chapterRegionName = next(l["region"] for l in location_table if l["name"] == chapterItemNames[i])
@@ -177,9 +178,6 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
                     region.locations.remove(location)
     if hasattr(multiworld, "clear_location_cache"):
         multiworld.clear_location_cache()
-
-    #for region in chaptersToRemove:                 # this HAS to be done in after_set_rules
-    #    del(multiworld.regions.region_cache[player][region.name])
 
 
 
@@ -218,7 +216,6 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
             multiworld.clear_location_cache()
 
     for itemName in itemNamesToRemove:
-        print("Trying to remove " + itemName)   # debug
         item = next(i for i in item_pool if i.name == itemName)
         item_pool.remove(item)
         print("Successfully removed " + itemName)   # debug
@@ -228,7 +225,7 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
 # The item pool after starting items are processed but before filler is added, in case you want to see the raw item pool at that stage
 def before_create_items_filler(item_pool: list, world: World, multiworld: MultiWorld, player: int) -> list:
     # Use this hook to remove items from the item pool
-    itemNamesToRemove = [] # List of item names
+    itemNamesToRemove: list[str] = [] # List of item names
 
     # Add your code here to calculate which items to remove.
     #
@@ -237,7 +234,6 @@ def before_create_items_filler(item_pool: list, world: World, multiworld: MultiW
 
     # if playing nonlinear mode, we first need to remove any extra core fragments
     if not get_option_value(multiworld, player, "linear_mode"):
-
         extra_core_frag_count = (4 - get_option_value(multiworld, player, "include_empire") - 
                            get_option_value(multiworld, player, "include_ship") - 
                            get_option_value(multiworld, player, "include_crypt") - 
@@ -308,12 +304,12 @@ def after_create_items(item_pool: list, world: World, multiworld: MultiWorld, pl
                 item_to_place = next(i for i in item_pool if i.name == "Core of Light Fragment")
                 level.place_locked_item(item_to_place)
                 item_pool.remove(item_to_place)
-    # otherwise, make the two extra progressive chapters into useful items
-    else:
-        prog_chapters = [i for i in item_pool if i.name == "Progressive Chapter"]
-        random.shuffle(prog_chapters)
-        for i in range(2):
-            prog_chapters[i].classification = ItemClassification.useful
+    # otherwise, make the extra progressive chapters into useful items (this skyrockets the failure rate)
+    #else:
+    #    prog_chapters = [i for i in item_pool if i.name == "Progressive Chapter"]
+    #    random.shuffle(prog_chapters)
+    #    for i in range(2):
+    #        prog_chapters[i].classification = ItemClassification.useful
 
     '''# make half of the skylanders in each element useful
     if not get_option_value(multiworld, player, "characters_as_items"):

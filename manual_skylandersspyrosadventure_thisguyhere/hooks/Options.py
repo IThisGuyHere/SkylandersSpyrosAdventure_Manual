@@ -47,8 +47,7 @@ class LinearMode(Toggle):
     default = True
 
 class NumChaptersToBeat(Range):
-    """The number of chapter completions required to reach the goal. Set this low for synchronous multiworlds. 
-    In linear mode, all non-manditory chapters will be removed. If set to less than 22, you will need an existing save with minimal progress."""
+    """The number of chapter completions required to reach the goal. Set this low for synchronous multiworlds."""
     display_name = "Chapters to Beat"
     range_start = 1
     range_end = 26
@@ -57,10 +56,12 @@ class NumChaptersToBeat(Range):
 class NumChaptersInPool(Range):
     """The number of story chapters included in the item and location pools. 
     This cannot be less than chapters_to_beat, and will be increased if necessary.
-    This option is designed for synchronous multiworlds, and only affects non-linear mode.
-    Each chapter removed will significantly reduce the amound of locations. As a safeguard, you may not remove more than half of the chapters."""
+    In linear mode, all chapters beyond this number (minus adventure packs) will be removed. 
+    If set to less than 22, you will need an existing save with minimal progress (even in linear mode).
+    This option is primarily designed for synchronous multiworlds.
+    Each chapter removed will significantly reduce the amound of locations. As a safeguard, you cannot remove more than half of the chapters."""
     display_name = "Chapters In Pool"
-    range_start = 14
+    range_start = 11
     range_end = 26
     default = 22
 
