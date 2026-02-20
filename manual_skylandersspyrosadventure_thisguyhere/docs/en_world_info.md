@@ -26,7 +26,8 @@ Visit the manual Discord server <a href=https://discord.com/channels/10975325916
 
 
 ## Items
-* Progressive Chapters: The number of chapters currently available to play.  **You will always start with 1**.
+* Progressive Chapters (linear mode): The number of chapters currently available to play. **You will always start with 1**.
+* Chapters (non-linear mode): Individually named chapters based on the levels in the game. **You will always start with 1**.
 * Progressive Soul Abilities - Unlocks the use of soul abilities collected in the first *n* chapters.
 * Progressive Skylander Upgrades - Unlocks the ability to purchase *n* upgrades for each Skylander (or each Skylander\
 of that element, depending on the yaml configuration).
@@ -55,7 +56,8 @@ sender's choosing.
 * Reset Last Character Trap - Hard Trap. Upon receipt, you must delete all data associated with the last Skylander\
 used. Level, money, and upgrades are reset.
 
-
+## Death link
+A death occurs when a skylander is defeated in-game or a challenge/arena match is failed. When you receive a death, you cannot use the current skylander for the remainder of the current level unless you restart. If you receive a death in the arena or during a challenge, you must restart it immediately.
 
 ## Ideas for the Future
 * ~~add chests as locations~~

@@ -3,6 +3,7 @@
   "game": "SkylandersSpyrosAdventure",
   "creator": "ThisGuyHere",
   "filler_item_name": "Sheep",
+  "death_link": true,
   "starting_items": [
     {
       "item_categories": [
