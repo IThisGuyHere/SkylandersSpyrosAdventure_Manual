@@ -16,6 +16,11 @@ def after_load_progressive_item_file(progressive_item_table: list) -> list:
 def after_load_location_file(location_table: list) -> list:
     return location_table
 
+# called after the events.json file has been loaded, before any processing has occurred
+# If you need access to the events after processing, you should use the hooks in World.py
+def after_load_event_file(event_table: list) -> list:
+    return event_table
+
 # called after the locations.json file has been loaded, before any location loading or processing has occurred
 # if you need access to the locations after processing to add ids, etc., you should use the hooks in World.py
 def after_load_region_file(region_table: dict) -> dict:
@@ -36,8 +41,3 @@ def after_load_option_file(option_table: dict) -> dict:
 def after_load_meta_file(meta_table: dict) -> dict:
     return meta_table
 
-# called when an external tool (eg Universal Tracker) ask for slot data to be read
-# use this if you want to restore more data
-# return True if you want to trigger a regeneration if you changed anything
-def hook_interpret_slot_data(world, player: int, slot_data: dict[str, any]) -> dict | bool:
-    return False
