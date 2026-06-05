@@ -212,7 +212,7 @@ def before_create_items_starting(item_pool: list, world: World, multiworld: Mult
                 for location in list(region.locations):
                     if location.name in locationNamesToRemove:
                         region.locations.remove(location)
-                        print(f"Successfully removed Heroic Challenge - {itemName}")   # debug
+                        print(f"Successfully removed {location.name}")   # debug
         if hasattr(multiworld, "clear_location_cache"):
             multiworld.clear_location_cache()
 
